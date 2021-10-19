@@ -20,8 +20,10 @@ public class LivreService {
 	@Autowired
 	EmpruntService es;
 	
-	@Autowired
-	LivreService ls;
+	public Livre addLivre(Livre livre) {
+		Livre l = lr.save(livre);
+		return l;
+	}
 	
 	public List<Livre> findAllLivres() {
 		List<Livre> liste = new ArrayList<Livre>();
@@ -47,15 +49,15 @@ public class LivreService {
 		
 		Iterator<Emprunt> it = es.findAllEmprunts().iterator();
 		while(it.hasNext()) {
-			if(it.next().getLivresE().contains(l)) {
-				it.next().removeLivre(l);
-				es.updateEmprunt(it.next());
+			if(it.next().getLivresEmpruntes().contains(l)) {
+				it.next().removeLivreEmprunte(l);
 			}
 		}
 		
 //		for(Emprunt e : l.getEmpruntLivres()) {
 //			e.removeLivre(l);
 //		}
+		
 		lr.delete(l);
 	}
 

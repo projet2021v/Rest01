@@ -30,11 +30,11 @@ public class Init_db {
 	public void init() {
 		Client c1 = new Client();
 		c1.setNom("LB");
-		c1.setPrenom("Jean-Yves");
+		c1.setPrenom("Michel");
 		
 		Client c2 = new Client();
 		c2.setNom("LB");
-		c2.setPrenom("Marc");
+		c2.setPrenom("Jean");
 		
 		
 		Livre l1 = new Livre();
@@ -70,22 +70,22 @@ public class Init_db {
 		e1.setDelai(5);
 		e1 = er.save(e1);
 		
-		e1.getLivresE().add(l1);
+		e1.getLivresEmpruntes().add(l1);
 //		l1.getEmpruntLivres().add(e1);
 		l1 = lr.save(l1);
 		
-		e1.getLivresE().add(l2);
+		e1.getLivresEmpruntes().add(l2);
 //		l2.getEmpruntLivres().add(e1);
 		l2 = lr.save(l2);
 		
-		e1.getLivresE().add(l3);
+		e1.getLivresEmpruntes().add(l3);
 //		l3.getEmpruntLivres().add(e1);
 		l3 = lr.save(l3);
 		
 		e1 = er.save(e1);
 		
-		c1.getEmprunts().add(e1);
-		e1.setClientE(c1);
+		c1.getEmpruntsDuClient().add(e1);
+		e1.setClientEmprunteur(c1);
 		c1 = cr.save(c1);
 		e1 = er.save(e1);
 		
@@ -97,14 +97,14 @@ public class Init_db {
 		e2.setDelai(5);
 		e2 = er.save(e2);
 		
-		e2.getLivresE().add(l3);
+		e2.getLivresEmpruntes().add(l3);
 //		l3.getEmpruntLivres().add(e2);
 		l3 = lr.save(l3);
 		
 		e2 = er.save(e2);
 		
-		c2.getEmprunts().add(e2);
-		e2.setClientE(c2);
+		c2.getEmpruntsDuClient().add(e2);
+		e2.setClientEmprunteur(c2);
 		c2 = cr.save(c2);
 		e2 = er.save(e2);
 		
@@ -116,18 +116,18 @@ public class Init_db {
 		e3.setDelai(5);
 		e3 = er.save(e3);
 		
-		e3.getLivresE().add(l2);
+		e3.getLivresEmpruntes().add(l2);
 //		l2.getEmpruntLivres().add(e3);
 		l2 = lr.save(l2);
 		
-		e3.getLivresE().add(l4);
+		e3.getLivresEmpruntes().add(l4);
 //		l4.getEmpruntLivres().add(e3);
 		l4 = lr.save(l4);
 		
 		e3 = er.save(e3);
 		
-		c1.getEmprunts().add(e3);
-		e3.setClientE(c1);
+		c1.getEmpruntsDuClient().add(e3);
+		e3.setClientEmprunteur(c1);
 		c1 = cr.save(c1);
 		e3 = er.save(e3);
 	}

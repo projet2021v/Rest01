@@ -9,18 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import fr.diginamic.Rest01.entities.Emprunt;
 import fr.diginamic.Rest01.entities.Livre;
-import fr.diginamic.Rest01.repository.ICrudEmpruntRepo;
-import fr.diginamic.Rest01.repository.ICrudLivreRepo;
 import fr.diginamic.Rest01.services.LivreService;
 
 @RestController
 @RequestMapping("/livres")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id" )
 public class LivreRest {
 	
 	@Autowired

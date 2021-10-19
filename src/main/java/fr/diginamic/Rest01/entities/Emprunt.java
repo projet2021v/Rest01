@@ -4,10 +4,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +18,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -43,33 +40,33 @@ public class Emprunt {
 	
 	@ManyToOne
 	@JoinColumn(name="id_client")
-	private Client clientE;
+	private Client clientEmprunteur;
 	
 	@ManyToMany
 	@JoinTable(name="livre_emprunt",
 	joinColumns= @JoinColumn(name="id_emp", referencedColumnName="id"),
 	inverseJoinColumns= @JoinColumn(name="id_liv", referencedColumnName="id"))
-	private Set<Livre> livresE;
+	private Set<Livre> livresEmpruntes;
 	
-	public void addLivre(Livre livre) {
-		this.getLivresE().add(livre);
+	public void addLivreEmprunte(Livre livre) {
+		this.getLivresEmpruntes().add(livre);
 //		livre.getEmpruntLivres().add(this);
 	}
 	
-	public void removeLivre(Livre livre) {
-		this.getLivresE().remove(livre);
+	public void removeLivreEmprunte(Livre livre) {
+		this.getLivresEmpruntes().remove(livre);
 //		livre.getEmpruntLivres().remove(this);
 	}
 
 	public Emprunt() {
-		this.livresE = new HashSet<Livre>();
+		this.livresEmpruntes = new HashSet<Livre>();
 	}
 
 	public Emprunt(Date datedebut, Date datefin, int delai) {
 		this.datedebut = datedebut;
 		this.datefin = datefin;
 		this.delai = delai;
-		this.livresE = new HashSet<Livre>();
+		this.livresEmpruntes = new HashSet<Livre>();
 	}
 
 	public int getId() {
@@ -100,20 +97,20 @@ public class Emprunt {
 		this.delai = delai;
 	}
 
-	public Client getClientE() {
-		return clientE;
+	public Client getClientEmprunteur() {
+		return clientEmprunteur;
 	}
 
-	public void setClientE(Client clientE) {
-		this.clientE = clientE;
+	public void setClientEmprunteur(Client clientEmprunteur) {
+		this.clientEmprunteur = clientEmprunteur;
 	}
 
-	public Set<Livre> getLivresE() {
-		return livresE;
+	public Set<Livre> getLivresEmpruntes() {
+		return livresEmpruntes;
 	}
 	
-	public void setLivresE(Set<Livre> livresE) {
-		this.livresE = livresE;
+	public void setLivresEmpruntes(Set<Livre> livresEmpruntes) {
+		this.livresEmpruntes = livresEmpruntes;
 	}
 	
 	@Override

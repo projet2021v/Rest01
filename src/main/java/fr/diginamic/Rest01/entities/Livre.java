@@ -1,35 +1,23 @@
 package fr.diginamic.Rest01.entities;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name="livre")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Livre {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "auteur", length = 50,nullable = false)
+	@Column(name = "auteur", length = 50, nullable = false)
 	private String auteur;
 	
-	@Column(name = "titre", length = 255,nullable = false)
+	@Column(name = "titre", length = 255, nullable = false)
 	private String titre;
 	
 //	@ManyToMany

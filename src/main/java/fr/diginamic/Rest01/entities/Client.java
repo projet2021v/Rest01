@@ -3,23 +3,15 @@ package fr.diginamic.Rest01.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 @Entity
 @Table(name="client")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Client {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -29,29 +21,29 @@ public class Client {
 		
 	private String prenom;
 	
-	@OneToMany(mappedBy="clientE", orphanRemoval = true)
-	private Set<Emprunt> emprunts;
+	@OneToMany(mappedBy="clientEmprunteur")
+	private Set<Emprunt> empruntsDuClient;
 	
 	
 	public void addEmprunt(Emprunt emprunt) {
-		this.getEmprunts().add(emprunt);
-		emprunt.setClientE(this);
+		this.getEmpruntsDuClient().add(emprunt);
+		emprunt.setClientEmprunteur(this);
 	}
 	
 	public void removeEmprunt(Emprunt emprunt) {
-		this.getEmprunts().remove(emprunt);
-		emprunt.setClientE(null);
+		this.getEmpruntsDuClient().remove(emprunt);
+		emprunt.setClientEmprunteur(null);
 	}
 	
 	
 	public Client() {
-		this.emprunts = new HashSet<Emprunt>();
+		this.empruntsDuClient = new HashSet<Emprunt>();
 	}
 
 	public Client(String nom, String prenom) {
 		this.nom = nom;
 		this.prenom = prenom;
-		this.emprunts = new HashSet<Emprunt>();
+		this.empruntsDuClient = new HashSet<Emprunt>();
 	}
 
 	public int getId() {
@@ -74,12 +66,12 @@ public class Client {
 		this.prenom = prenom;
 	}
 
-	public Set<Emprunt> getEmprunts() {
-		return emprunts;
+	public Set<Emprunt> getEmpruntsDuClient() {
+		return empruntsDuClient;
 	}
 	
-	public void setEmprunts(Set<Emprunt> emprunts) {
-		this.emprunts = emprunts;
+	public void setEmpruntsDuClient(Set<Emprunt> empruntsDuClient) {
+		this.empruntsDuClient = empruntsDuClient;
 	}
 
 	@Override

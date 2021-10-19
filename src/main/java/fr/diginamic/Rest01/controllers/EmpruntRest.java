@@ -1,7 +1,5 @@
 package fr.diginamic.Rest01.controllers;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +9,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import fr.diginamic.Rest01.entities.Emprunt;
-import fr.diginamic.Rest01.repository.ICrudEmpruntRepo;
 import fr.diginamic.Rest01.services.EmpruntService;
-import fr.diginamic.Rest01.services.LivreService;
 
 @RestController
 @RequestMapping("/emprunts")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id" )
 public class EmpruntRest {
 	
 	@Autowired
