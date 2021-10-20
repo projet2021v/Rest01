@@ -40,6 +40,14 @@ public class ClientService {
 		return cr.findById(id).get();
 	}
 	
+	public void updateClient(Client client, Integer id) {
+		Client c = cr.findById(id).get();
+		c.setNom(client.getNom());
+		c.setPrenom(client.getPrenom());
+		c.setEmpruntsDuClient(client.getEmpruntsDuClient());
+		cr.save(c);
+	}
+	
 	public void removeClient(Integer id) {
 		Client c = cr.findById(id).get();
 		

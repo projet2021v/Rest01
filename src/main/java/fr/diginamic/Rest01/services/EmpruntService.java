@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.Rest01.entities.Emprunt;
+import fr.diginamic.Rest01.entities.Livre;
 import fr.diginamic.Rest01.repository.ICrudEmpruntRepo;
 
 @Service
@@ -33,6 +34,16 @@ public class EmpruntService {
 	
 	public Emprunt findEmpruntById(Integer id) {
 		return er.findById(id).get();
+	}
+	
+	public void updateEmprunt(Emprunt emprunt, Integer id) {
+		Emprunt e = er.findById(id).get();
+		e.setDatedebut(emprunt.getDatedebut());
+		e.setDatefin(emprunt.getDatefin());
+		e.setDelai(emprunt.getDelai());
+		e.setClientEmprunteur(emprunt.getClientEmprunteur());
+		e.setLivresEmpruntes(emprunt.getLivresEmpruntes());
+		er.save(e);
 	}
 	
 	public void removeEmprunt(Integer id) {

@@ -38,10 +38,10 @@ public class LivreService {
 		return lr.findById(id).get();
 	}
 	
-	public void updateLivre(Livre livre) {
-		Livre l = lr.findById(livre.getId()).get();
+	public void updateLivre(Livre livre, Integer id) {
+		Livre l = lr.findById(id).get();
 		l.setAuteur(livre.getAuteur());
-		l.setTitre(livre.getAuteur());
+		l.setTitre(livre.getTitre());
 		lr.save(l);
 	}
 	
