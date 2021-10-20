@@ -3,6 +3,7 @@ package fr.diginamic.Rest01.services;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,10 +48,11 @@ public class LivreService {
 	public void removeLivre(Integer id) {
 		Livre l = lr.findById(id).get();
 		
-		Iterator<Emprunt> it = es.findAllEmprunts().iterator();
+		ListIterator<Emprunt> it = es.findAllEmprunts().listIterator();
 		while(it.hasNext()) {
-			if(it.next().getLivresEmpruntes().contains(l)) {
-				it.next().removeLivreEmprunte(l);
+			Emprunt e = it.next();
+			if(e.getLivresEmpruntes().contains(l)) {
+				e.removeLivreEmprunte(l);
 			}
 		}
 		

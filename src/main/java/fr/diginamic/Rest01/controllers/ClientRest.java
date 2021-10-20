@@ -1,5 +1,7 @@
 package fr.diginamic.Rest01.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +24,7 @@ public class ClientRest {
 	ClientService cs;
 	
 	@GetMapping("/all")
-	public Iterable<Client> findAll() {
+	public List<Client> findAll() {
 		return cs.findAllClients();
 	}
 	

@@ -1,9 +1,12 @@
 package fr.diginamic.Rest01.entities;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,29 +24,31 @@ public class Client {
 		
 	private String prenom;
 	
-	@OneToMany(mappedBy="clientEmprunteur")
-	private Set<Emprunt> empruntsDuClient;
+	@OneToMany(mappedBy="clientEmprunteur", fetch = FetchType.EAGER)
+	private List<Emprunt> empruntsDuClient;
 	
 	
 	public void addEmprunt(Emprunt emprunt) {
-		this.getEmpruntsDuClient().add(emprunt);
 		emprunt.setClientEmprunteur(this);
+		this.getEmpruntsDuClient().add(emprunt);
 	}
 	
 	public void removeEmprunt(Emprunt emprunt) {
-		this.getEmpruntsDuClient().remove(emprunt);
 		emprunt.setClientEmprunteur(null);
+		this.getEmpruntsDuClient().remove(emprunt);
 	}
 	
 	
 	public Client() {
-		this.empruntsDuClient = new HashSet<Emprunt>();
+//		this.empruntsDuClient = new HashSet<Emprunt>();
+		this.empruntsDuClient = new ArrayList<Emprunt>();
 	}
 
 	public Client(String nom, String prenom) {
 		this.nom = nom;
 		this.prenom = prenom;
-		this.empruntsDuClient = new HashSet<Emprunt>();
+//		this.empruntsDuClient = new HashSet<Emprunt>();
+		this.empruntsDuClient = new ArrayList<Emprunt>();
 	}
 
 	public int getId() {
@@ -66,11 +71,11 @@ public class Client {
 		this.prenom = prenom;
 	}
 
-	public Set<Emprunt> getEmpruntsDuClient() {
+	public List<Emprunt> getEmpruntsDuClient() {
 		return empruntsDuClient;
 	}
 	
-	public void setEmpruntsDuClient(Set<Emprunt> empruntsDuClient) {
+	public void setEmpruntsDuClient(List<Emprunt> empruntsDuClient) {
 		this.empruntsDuClient = empruntsDuClient;
 	}
 

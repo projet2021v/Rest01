@@ -3,6 +3,9 @@ package fr.diginamic.Rest01.services;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+
+import javax.sound.midi.SysexMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,12 +44,12 @@ public class ClientService {
 		Client c = cr.findById(id).get();
 		
 		//clean des emprunts du client
-		Iterator<Emprunt> it = c.getEmpruntsDuClient().iterator();
-		while(it.hasNext()) {
+		while(c.getEmpruntsDuClient().size() != 0) {
+			ListIterator<Emprunt> it = c.getEmpruntsDuClient().listIterator();
 			Emprunt e = it.next();
 			es.removeEmprunt(e.getId());
 		}
-		
+
 		//suppression du client
 		cr.delete(c);
 	}
