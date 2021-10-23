@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +17,11 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import fr.diginamic.Rest01.entities.Client;
+import fr.diginamic.Rest01.exceptions.ClientException;
 import fr.diginamic.Rest01.services.ClientService;
 
 @RestController
-@RequestMapping("/clients")
+@RequestMapping("/rest/clients")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id" )
 public class ClientRest {
 	
@@ -37,20 +39,20 @@ public class ClientRest {
 	}
 	
 	@GetMapping("/{id}")
-	public Client findOneById(@PathVariable Integer id) {
-		return cs.findClientById(id);
+	public Client findOneById(@PathVariable Integer id) throws ClientException {
+		Client c = cs.findClientById(id);
+		return c;
 	}
 	
 	@PutMapping("/{id}/update")
-	public void update(@RequestBody Client c, @PathVariable Integer id) {
+	public void update(@RequestBody Client c, @PathVariable Integer id) throws ClientException {
 		cs.updateClient(c, id);
 	}
 	
 	@DeleteMapping("/{id}/delete")
-	public void delete(@PathVariable Integer id) {
+	public void delete(@PathVariable Integer id) throws ClientException {
 		cs.removeClient(id);
 	}
-	
 	
 
 }

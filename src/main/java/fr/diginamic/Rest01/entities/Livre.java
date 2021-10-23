@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="livre")
@@ -15,39 +16,26 @@ public class Livre {
 	private int id;
 	
 	@Column(name = "auteur", length = 50, nullable = false)
+	@NotBlank(message = "L''auteur ne doit être ni vide ni uniquement composé d''espaces")
 	private String auteur;
 	
 	@Column(name = "titre", length = 255, nullable = false)
+	@NotBlank(message = "Le titre ne doit être ni vide ni uniquement composé d''espaces")
 	private String titre;
 	
-//	@ManyToMany
-//	@JoinTable(name="livre_emprunt",
-//		joinColumns= @JoinColumn(name="id_liv", referencedColumnName="id"),
-//		inverseJoinColumns= @JoinColumn(name="id_emp", referencedColumnName="id"))
-//	private Set<Emprunt> empruntLivres;
-	
-//	public void addEmprunt(Emprunt emprunt) {
-//		this.getEmpruntLivres().add(emprunt);
-//		emprunt.getLivresE().add(this);
-//	}
-//	
-//	public void removeEmprunt(Emprunt emprunt) {
-//		this.getEmpruntLivres().remove(emprunt);
-//		emprunt.getLivresE().remove(this);
-//	}
-	
-	public Livre() {
-//		empruntLivres = new HashSet<Emprunt>();
-	}
+	public Livre() {}
 		
 	public Livre(String auteur, String titre) {
 		this.auteur = auteur;
 		this.titre = titre;
-//		empruntLivres = new HashSet<Emprunt>();
 	}
 
 	public int getId() {
 		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getAuteur() {
@@ -65,14 +53,6 @@ public class Livre {
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
-
-//	public Set<Emprunt> getEmpruntLivres() {
-//		return empruntLivres;
-//	}
-//	
-//	public void setEmpruntLivres(Set<Emprunt> empruntLivres) {
-//		this.empruntLivres = empruntLivres;
-//	}
 	
 	@Override
 	public String toString() {

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>EMPRUNTS | gestion</title>
+	</head>
+	
+	<body>
+		<div th:insert="fragments/header.html :: header"></div>
+		
+			<table>
+				<tr>
+					<td>CLIENT</td><td>DATE EMPRUNT</td><td>DATE REMISE PRÉVUE</td><td>DÉLAI</td><td>LIVRES EMPRUNTÉS</td><td>
+				</tr>
+				<tr th:each="e : ${listeEmprunts}">
+					<td th:text="${e.getClientEmprunteur().nom + ' ' + e.getClientEmprunteur().prenom}"></td>	
+					<td th:text=${e.datedebut}></td>
+					<td th:text=${e.datefin}></td>
+					<td th:text=${e.delai}></td>
+					<td>
+						<ul th:each="l : ${e.getLivresEmpruntes()}">
+							<li th:text="${l.titre} + ', de ' + ${l.auteur}"></li>
+						</ul>
+					</td>
+					<td>
+						<a th:href="@{/emprunts/{id}/update(id=${e.id})}">Modifier</a> | 
+						<a th:href="@{/emprunts/{id}/delete(id=${e.id})}">Supprimer</a>
+					</td>
+				</tr>
+			</table>
+			<br><br>
+			<a th:href="@{/emprunts/create}">Ajouter un nouvel emprunt</a>
+	</body>
+</html>

@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.Rest01.entities.Emprunt;
 import fr.diginamic.Rest01.entities.Livre;
+import fr.diginamic.Rest01.exceptions.LivreException;
 import fr.diginamic.Rest01.repository.ICrudLivreRepo;
 
 @Service
@@ -34,19 +36,31 @@ public class LivreService {
 		return liste;
 	}
 	
-	public Livre findLivreById(Integer id) {
-		return lr.findById(id).get();
+	public Livre findLivreById(Integer id) throws LivreException {
+		Optional<Livre> lOpt = lr.findById(id);
+		if(lOpt.isEmpty()) {
+			throw new LivreException("Livre inexistant");
+		}
+		return lOpt.get();
 	}
 	
-	public void updateLivre(Livre livre, Integer id) {
-		Livre l = lr.findById(id).get();
+	public void updateLivre(Livre livre, Integer id) throws LivreException {
+		Optional<Livre> lOpt = lr.findById(id);
+		if(lOpt.isEmpty()) {
+			throw new LivreException("Livre inexistant");
+		}
+		Livre l = lOpt.get();
 		l.setAuteur(livre.getAuteur());
 		l.setTitre(livre.getTitre());
 		lr.save(l);
 	}
 	
-	public void removeLivre(Integer id) {
-		Livre l = lr.findById(id).get();
+	public void removeLivre(Integer id) throws LivreException {
+		Optional<Livre> lOpt = lr.findById(id);
+		if(lOpt.isEmpty()) {
+			throw new LivreException("Livre inexistant");
+		}
+		Livre l = lOpt.get();
 		
 		ListIterator<Emprunt> it = es.findAllEmprunts().listIterator();
 		while(it.hasNext()) {
@@ -55,11 +69,7 @@ public class LivreService {
 				e.removeLivreEmprunte(l);
 			}
 		}
-		
-//		for(Emprunt e : l.getEmpruntLivres()) {
-//			e.removeLivre(l);
-//		}
-		
+
 		lr.delete(l);
 	}
 

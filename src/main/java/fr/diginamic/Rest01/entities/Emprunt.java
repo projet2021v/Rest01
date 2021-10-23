@@ -17,6 +17,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.lang.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -30,13 +36,18 @@ public class Emprunt {
 	private int id;
 	
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "date_debut")
+	@NotNull(message = "La date d''emprunt doit être indiquée")
 	private Date datedebut;
 	
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "date_fin")
+	@Nullable
 	private Date datefin;
 	
+	@Min(value = 2, message = "Le délai doit être supérieur ou égal à 2")
 	private int delai;
 	
 	@ManyToOne
@@ -51,12 +62,10 @@ public class Emprunt {
 	
 	public void addLivreEmprunte(Livre livre) {
 		this.getLivresEmpruntes().add(livre);
-//		livre.getEmpruntLivres().add(this);
 	}
 	
 	public void removeLivreEmprunte(Livre livre) {
 		this.getLivresEmpruntes().remove(livre);
-//		livre.getEmpruntLivres().remove(this);
 	}
 
 	public Emprunt() {

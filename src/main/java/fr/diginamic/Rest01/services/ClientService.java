@@ -1,17 +1,17 @@
 package fr.diginamic.Rest01.services;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-
-import javax.sound.midi.SysexMessage;
+import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.Rest01.entities.Client;
 import fr.diginamic.Rest01.entities.Emprunt;
+import fr.diginamic.Rest01.exceptions.ClientException;
 import fr.diginamic.Rest01.repository.ICrudClientRepo;
 
 @Service
@@ -36,20 +36,32 @@ public class ClientService {
 		return liste;
 	}
 	
-	public Client findClientById(Integer id) {
-		return cr.findById(id).get();
+	public Client findClientById(Integer id) throws ClientException {
+		Optional<Client> cOpt = cr.findById(id);
+		if(cOpt.isEmpty()) {
+			throw new ClientException("Client inexistant");
+		}
+		return cOpt.get();
 	}
 	
-	public void updateClient(Client client, Integer id) {
-		Client c = cr.findById(id).get();
+	public void updateClient(Client client, Integer id) throws ClientException {
+		Optional<Client> cOpt = cr.findById(id);
+		if(cOpt.isEmpty()) {
+			throw new ClientException("Client inexistant");
+		}
+		Client c = cOpt.get();
 		c.setNom(client.getNom());
 		c.setPrenom(client.getPrenom());
 		c.setEmpruntsDuClient(client.getEmpruntsDuClient());
-		cr.save(c);
+		cr.save(c);	
 	}
 	
-	public void removeClient(Integer id) {
-		Client c = cr.findById(id).get();
+	public void removeClient(Integer id) throws ClientException {
+		Optional<Client> cOpt = cr.findById(id);
+		if(cOpt.isEmpty()) {
+			throw new ClientException("Client inexistant");
+		}
+		Client c = cOpt.get();
 		
 		//clean des emprunts du client
 		while(c.getEmpruntsDuClient().size() != 0) {

@@ -19,7 +19,7 @@ import fr.diginamic.Rest01.entities.Emprunt;
 import fr.diginamic.Rest01.services.EmpruntService;
 
 @RestController
-@RequestMapping("/emprunts")
+@RequestMapping("/rest/emprunts")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id" )
 public class EmpruntRest {
 	

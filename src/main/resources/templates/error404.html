@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>404</title>
+	</head>
+	
+	<body>
+		<h1>ERREUR 404 - page non trouvée</h1>
+		
+		<h3 th:text=${errorClass}></h3>
+		<p th:text=${errorMessage}></p>
+		
+		<br>
+		
+		<a th:href=@{/}>Retour à l'accueil</a>
+		
+	</body>
+</html>

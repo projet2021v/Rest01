@@ -1,9 +1,7 @@
 package fr.diginamic.Rest01.entities;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="client")
@@ -20,8 +19,10 @@ public class Client {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@NotBlank(message = "Le nom ne doit être ni vide ni uniquement composé d''espaces")
 	private String nom;
-		
+	
+	@NotBlank(message = "Le prénom ne doit être ni vide ni uniquement composé d''espaces")
 	private String prenom;
 	
 	@OneToMany(mappedBy="clientEmprunteur", fetch = FetchType.EAGER)
@@ -53,6 +54,10 @@ public class Client {
 
 	public int getId() {
 		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNom() {

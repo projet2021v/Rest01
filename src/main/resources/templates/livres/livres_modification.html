@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>LIVRES | modification</title>
+	</head>
+	
+	<body>
+		<div th:insert="fragments/header.html :: header"></div>
+		
+		<h2>Modifier un livre</h2>
+		
+		<form th:action="@{/livres/{id}/update(id=${livreToUpdate.id})}" th:object="${livreToUpdate}" method="post">
+			<label for="auteur">AUTEUR</label><br>
+			<input type="text" id="auteur" th:field="*{auteur}"/>
+			<span th:if="${#fields.hasErrors('auteur')}" th:errors="*{auteur}"></span>
+			<br><br>
+			
+			<label for="titre">TITRE</label><br>
+			<input type="text" id="titre" th:field="*{titre}"/>
+			<span th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}"></span>
+			<br><br>
+			
+			<input type="submit" value="Modifier"/>
+		</form>
+		<br><br>
+		<a th:href="@{/livres/all}">Retour</a>
+	</body>
+</html>

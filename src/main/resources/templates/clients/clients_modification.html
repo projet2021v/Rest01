@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>CLIENTS | modification</title>
+	</head>
+	
+	<body>
+		<div th:insert="fragments/header.html :: header"></div>
+		
+		<h2>Modifier un client</h2>
+		
+		<form th:action="@{/clients/{id}/update(id=${clientToUpdate.id})}"
+			th:object="${clientToUpdate}"
+			method="post">
+			
+			<label for="nom">NOM</label><br>
+			<input type="text" id="nom" th:field="*{nom}"/>
+			<span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+			<br><br>
+			
+			<label for="prenom">PRÉNOM</label><br>
+			<input type="text" id="prenom" th:field="*{prenom}"/>
+			<span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
+			<br><br>
+			
+			<input type="submit" value="Modifier"/>
+		</form>
+		<br><br>
+		<a th:href="@{/clients/all}">Retour</a>
+	</body>
+</html>
