@@ -59,6 +59,11 @@ public class LivreController {
 			@ModelAttribute("livreToUpdate") @Valid Livre l, 
 			BindingResult result) throws LivreException {
 		if(result.hasErrors()) {
+			/*
+			 * On ne devrait pas avoir à utiliser de setId().
+			 * SpringBoot permet d'updater automatiquement, 
+			 * je ne comprends pas pourquoi cela ne fonctionne pas ici.
+			 */
 			l.setId(id);
 			return "livres/livres_modification";
 		}

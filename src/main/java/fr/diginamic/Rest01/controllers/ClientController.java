@@ -65,6 +65,11 @@ public class ClientController {
 			BindingResult result,
 			@PathVariable Integer id) throws ClientException {
 		if(result.hasErrors()) {
+			/*
+			 * On ne devrait pas avoir à utiliser de setId().
+			 * SpringBoot permet d'updater automatiquement, 
+			 * je ne comprends pas pourquoi cela ne fonctionne pas ici.
+			 */
 			c.setId(id);
 			return "clients/clients_modification";
 		}

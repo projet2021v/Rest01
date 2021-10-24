@@ -64,6 +64,13 @@ public class ClientService {
 		Client c = cOpt.get();
 		
 		//clean des emprunts du client
+		/*
+		 * Ici bricolage:
+		 * ListIterator est un type "FailFast", 
+		 * c-à-d qu'il ne permet la suppression à la volée d'un de ses éléments que si c'est lui-même qui la réalise (it.remove()).
+		 * Ici la suppression est déléguée au service (EmpruntService), et ListIterator lance donc une exception.
+		 * => j'ai opté pour la construction d'un ListIterator pour chaque emprunt, ce qui n'est pas élégant.
+		 */
 		while(c.getEmpruntsDuClient().size() != 0) {
 			ListIterator<Emprunt> it = c.getEmpruntsDuClient().listIterator();
 			Emprunt e = it.next();
