@@ -5,14 +5,18 @@ import java.util.Date;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import fr.diginamic.Rest01.entities.Client;
 import fr.diginamic.Rest01.entities.Emprunt;
 import fr.diginamic.Rest01.entities.Livre;
+import fr.diginamic.Rest01.entities.User;
 import fr.diginamic.Rest01.repository.ICrudClientRepo;
 import fr.diginamic.Rest01.repository.ICrudEmpruntRepo;
 import fr.diginamic.Rest01.repository.ICrudLivreRepo;
+import fr.diginamic.Rest01.securite.UserRepository;
 
 @Component
 public class Init_db {
@@ -26,8 +30,17 @@ public class Init_db {
 	@Autowired
 	ICrudLivreRepo lr;
 	
+	@Autowired
+	UserRepository ur;
+	
 	@PostConstruct
 	public void init() {
+		
+		User u1 = new User("ad", "ad");
+		PasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+		u1.setPassword(pwdEncoder.encode(u1.getPassword()));
+		ur.save(u1);
+		
 		Client c1 = new Client();
 		c1.setNom("LB");
 		c1.setPrenom("Michel");
