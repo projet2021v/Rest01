@@ -10,9 +10,11 @@ import org.springframework.stereotype.Component;
 import fr.diginamic.Rest01.entities.Client;
 import fr.diginamic.Rest01.entities.Emprunt;
 import fr.diginamic.Rest01.entities.Livre;
+import fr.diginamic.Rest01.entities.User;
 import fr.diginamic.Rest01.repository.ICrudClientRepo;
 import fr.diginamic.Rest01.repository.ICrudEmpruntRepo;
 import fr.diginamic.Rest01.repository.ICrudLivreRepo;
+import fr.diginamic.Rest01.repository.ICrudUserRepo;
 
 @Component
 public class Init_db {
@@ -26,8 +28,19 @@ public class Init_db {
 	@Autowired
 	ICrudLivreRepo lr;
 	
+	@Autowired
+	ICrudUserRepo ur;
+	
+//	@Autowired
+//	UserRepository urr;
+	
 	@PostConstruct
 	public void init() {
+		
+		User u1 = new User("admin", "admin");
+		ur.save(u1);
+//		urr.save(u1);
+		
 		Client c1 = new Client();
 		c1.setNom("LB");
 		c1.setPrenom("Michel");
