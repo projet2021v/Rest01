@@ -2,33 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8"/>
+		<link rel="stylesheet" href="/style.css">
 		<title>EMPRUNTS | gestion</title>
 	</head>
 	
 	<body>
 		<div th:insert="fragments/header.html :: header"></div>
 		
-			<table>
-				<tr>
-					<td>CLIENT</td><td>DATE EMPRUNT</td><td>DATE REMISE PRÉVUE</td><td>DÉLAI</td><td>LIVRES EMPRUNTÉS</td><td>
-				</tr>
-				<tr th:each="e : ${listeEmprunts}">
-					<td th:text="${e.getClientEmprunteur().nom + ' ' + e.getClientEmprunteur().prenom}"></td>	
-					<td th:text=${e.datedebut}></td>
-					<td th:text=${e.datefin}></td>
-					<td th:text=${e.delai}></td>
-					<td>
-						<ul th:each="l : ${e.getLivresEmpruntes()}">
-							<li th:text="${l.titre} + ', de ' + ${l.auteur}"></li>
-						</ul>
-					</td>
-					<td>
-						<a th:href="@{/emprunts/{id}/update(id=${e.id})}">Modifier</a> | 
-						<a th:href="@{/emprunts/{id}/delete(id=${e.id})}">Supprimer</a>
-					</td>
-				</tr>
-			</table>
-			<br><br>
-			<a th:href="@{/emprunts/create}">Ajouter un nouvel emprunt</a>
+		<h2>Liste des emprunts</h2>
+		
+		<div class="content">
+			<div class="content-table">
+				<table>
+					<tr>
+						<th>CLIENT</th><th>DATE EMPRUNT</th><th>DATE REMISE PRÉVUE</th><th>DÉLAI</th><th>LIVRES EMPRUNTÉS</th><th></th>
+					</tr>
+					<tr th:each="e : ${listeEmprunts}">
+						<td th:text="${e.getClientEmprunteur().nom + ' ' + e.getClientEmprunteur().prenom}"></td>	
+						<td th:text=${e.datedebut}></td>
+						<td th:text=${e.datefin}></td>
+						<td th:text=${e.delai}></td>
+						<td>
+							<ul th:each="l : ${e.getLivresEmpruntes()}">
+								<li class="livres-emprunts" th:text="${l.titre} + ', de ' + ${l.auteur}"></li>
+							</ul>
+						</td>
+						<td>
+							<a th:href="@{/emprunts/{id}/update(id=${e.id})}">Modifier</a> | 
+							<a th:href="@{/emprunts/{id}/delete(id=${e.id})}">Supprimer</a>
+						</td>
+					</tr>
+				</table>
+				
+				<a class="bottom-btn" th:href="@{/emprunts/create}">Ajouter un nouvel emprunt</a>
+			</div>
+		</div>
 	</body>
 </html>

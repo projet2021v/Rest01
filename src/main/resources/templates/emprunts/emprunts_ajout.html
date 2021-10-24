@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8"/>
+		<link rel="stylesheet" href="/style.css">
 		<title>EMPRUNTS | ajout</title>
 	</head>
 	
@@ -10,37 +11,41 @@
 		
 		<h2>Ajoutez un nouvel emprunt</h2>
 		
-		<form th:action="@{/emprunts/create}" th:object="${newEmprunt}" method="post">
-			 
-			<label for="client">CLIENT</label><br>
-			<select id="client" th:field="*{clientEmprunteur}">
-				<option  th:each="c : ${listeClients}" th:text="${c.nom} + ' ' + ${c.prenom}" th:value="${c.id}"></option>
-			</select><br><br>
-			
-			
-			<label for="dateDebut">DATE EMPRUNT</label><br>
-			<input type="date" id="dateDebut" th:field="*{datedebut}">
-			<span th:if="${#fields.hasErrors('datedebut')}" th:errors="*{datedebut}"></span>
-			<br><br>
-			
-			<label for="dateFin">DATE REMISE</label><br>
-			<input type="date" id="dateFin" th:field="*{datefin}"><br><br>
-			
-			<label for="delai">DÉLAI</label><br>
-			<input type="number" id="delai" th:field="*{delai}" th:value="2">
-			<span th:if="${#fields.hasErrors('delai')}" th:errors="*{delai}"></span>
-			<br><br>
-			
-			
-			<label for="livres">LIVRES EMPRUNTÉS</label><br>
-			<select id="livres" multiple="multiple" size="2" th:field="*{livresEmpruntes}">
-				<option th:each="l : ${listeLivres}" th:text="${l.titre} + ' (' + ${l.auteur} + ')'" th:value="${l.id}"></option>
-			</select><br><br>
-			
-
-			<input type="submit" value="Ajouter"/>
-		</form>
-		<br><br>
-		<a th:href="@{/emprunts/all}">Retour</a>
+		<div class="content">
+			<div class="content-table">
+				<form th:action="@{/emprunts/create}" th:object="${newEmprunt}" method="post">
+					 
+					<label for="client">CLIENT</label><br>
+					<select id="client" class="field" th:field="*{clientEmprunteur}">
+						<option  th:each="c : ${listeClients}" th:text="${c.nom} + ' ' + ${c.prenom}" th:value="${c.id}"></option>
+					</select><br><br>
+					
+					
+					<label for="dateDebut">DATE EMPRUNT</label><br>
+					<input type="date" id="dateDebut" class="field" th:field="*{datedebut}">
+					<span th:if="${#fields.hasErrors('datedebut')}" th:errors="*{datedebut}"></span>
+					<br><br>
+					
+					<label for="dateFin">DATE REMISE</label><br>
+					<input type="date" id="dateFin" class="field" th:field="*{datefin}"><br><br>
+					
+					<label for="delai">DÉLAI</label><br>
+					<input type="number" id="delai" class="field" th:field="*{delai}" th:value="2">
+					<span th:if="${#fields.hasErrors('delai')}" th:errors="*{delai}"></span>
+					<br><br>
+					
+					
+					<label for="livres">LIVRES EMPRUNTÉS</label><br>
+					<select id="livres" multiple="multiple" size="2" class="field" th:field="*{livresEmpruntes}">
+						<option th:each="l : ${listeLivres}" th:text="${l.titre} + ' (' + ${l.auteur} + ')'" th:value="${l.id}"></option>
+					</select><br><br>
+					
+		
+					<input class="btn" type="submit" value="Ajouter"/>
+				</form>
+				
+				<a class="bottom-btn" th:href="@{/emprunts/all}">Retour</a>
+			</div>
+		</div>
 	</body>
 </html>

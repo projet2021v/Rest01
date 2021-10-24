@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8"/>
+		<link rel="stylesheet" href="/style.css">
 		<title>CLIENTS | ajout</title>
 	</head>
 	
@@ -10,20 +11,24 @@
 		
 		<h2>Ajoutez un nouveau client</h2>
 		
-		<form th:action="@{/clients/create}" th:object="${newClient}" method="post">
-			<label for="nom">NOM</label><br>
-			<input type="text" id="nom" th:field="*{nom}"/>
-			<span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
-			<br><br>
-			
-			<label for="prenom">PRÉNOM</label><br>
-			<input type="text" id="prenom" th:field="*{prenom}"/>
-			<span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
-			<br><br>
-			
-			<input type="submit" value="Ajouter"/>
-		</form>
-		<br><br>
-		<a th:href="@{/clients/all}">Retour</a>
+		<div class="content">
+			<div class="content-table">
+				<form th:action="@{/clients/create}" th:object="${newClient}" method="post">
+					<label for="nom">NOM</label><br>
+					<input type="text" id="nom" class="field" th:field="*{nom}"/>
+					<span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+					<br><br>
+					
+					<label for="prenom">PRÉNOM</label><br>
+					<input type="text" id="prenom" class="field" th:field="*{prenom}"/>
+					<span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
+					<br><br>
+					
+					<input class="btn" type="submit" value="Ajouter"/>
+				</form>
+				
+				<a class="bottom-btn" th:href="@{/clients/all}">Retour</a>
+			</div>
+		</div>
 	</body>
 </html>

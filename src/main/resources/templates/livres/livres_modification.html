@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8"/>
+		<link rel="stylesheet" href="/style.css">
 		<title>LIVRES | modification</title>
 	</head>
 	
@@ -10,20 +11,25 @@
 		
 		<h2>Modifier un livre</h2>
 		
-		<form th:action="@{/livres/{id}/update(id=${livreToUpdate.id})}" th:object="${livreToUpdate}" method="post">
-			<label for="auteur">AUTEUR</label><br>
-			<input type="text" id="auteur" th:field="*{auteur}"/>
-			<span th:if="${#fields.hasErrors('auteur')}" th:errors="*{auteur}"></span>
-			<br><br>
-			
-			<label for="titre">TITRE</label><br>
-			<input type="text" id="titre" th:field="*{titre}"/>
-			<span th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}"></span>
-			<br><br>
-			
-			<input type="submit" value="Modifier"/>
-		</form>
-		<br><br>
-		<a th:href="@{/livres/all}">Retour</a>
+		<div class="content">
+			<div class="content-table">
+				<form th:action="@{/livres/{id}/update(id=${livreToUpdate.id})}" th:object="${livreToUpdate}" method="post">
+					<label for="auteur">AUTEUR</label><br>
+					<input type="text" id="auteur" class="field" th:field="*{auteur}"/>
+					<span th:if="${#fields.hasErrors('auteur')}" th:errors="*{auteur}"></span>
+					<br><br>
+					
+					<label for="titre">TITRE</label><br>
+					<input type="text" id="titre" class="field" th:field="*{titre}"/>
+					<span th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}"></span>
+					<br><br>
+					
+					<input class="btn" type="submit" value="Modifier"/>
+				</form>
+				
+				<a class="bottom-btn" th:href="@{/livres/all}">Retour</a>
+			</div>
+		</div>	
+				
 	</body>
 </html>

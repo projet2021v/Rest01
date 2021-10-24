@@ -2,26 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8"/>
+		<link rel="stylesheet" href="/style.css">
 		<title>LIVRES | gestion</title>
 	</head>
 	
 	<body>
 		<div th:insert="fragments/header.html :: header"></div>
 		
-			<table>
-				<tr>
-					<td>AUTEUR</td><td>TITRE</td><td></td>
-				</tr>
-				<tr th:each="l : ${listeLivres}">
-					<td th:text=${l.auteur}></td>	
-					<td th:text=${l.titre}></td>
-					<td>
-						<a th:href="@{/livres/{id}/update(id=${l.id})}">Modifier</a> | 
-						<a th:href="@{/livres/{id}/delete(id=${l.id})}">Supprimer</a>
-					</td>
-				</tr>
-			</table>
-			<br><br>
-			<a th:href="@{/livres/create}">Ajouter un nouveau livre</a>
+		<h2>Liste des livres</h2>
+		
+		<div class="content">
+			<div class="content-table">
+				<table>
+					<tr>
+						<th class="test">AUTEUR</th><th>TITRE</th><th></th>
+					</tr>
+					<tr th:each="l : ${listeLivres}">
+						<td th:text=${l.auteur}></td>	
+						<td th:text=${l.titre}></td>
+						<td>
+							<a th:href="@{/livres/{id}/update(id=${l.id})}">Modifier</a> | 
+							<a th:href="@{/livres/{id}/delete(id=${l.id})}">Supprimer</a>
+						</td>
+					</tr>
+				</table>
+			
+				<a class="bottom-btn" th:href="@{/livres/create}">Ajouter un nouveau livre</a>
+			</div>
+		</div>
 	</body>
 </html>

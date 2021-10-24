@@ -1,0 +1,111 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.header {
+	background-color: #aaaaaa;
+	border-bottom: solid 1px #444444;
+	box-shadow: 0px 3px 4px #888888;
+}
+
+.header h1 {
+	padding: 10px;
+	color: #800040;
+}
+
+.header nav {
+	padding: 10px;
+}
+
+body {
+	background-color: #cccccc;
+	color: black;
+	font-size: 1.3em;
+}
+
+body h2 {
+	text-align: center;
+	margin-top: 30px;
+}
+
+body a {
+	color: #5500dd;
+	text-decoration: none;
+}
+
+body a:hover {
+	color: #800040;
+}
+
+body form {
+	margin: 30px 0 30px 0;
+}
+
+.field {
+	width: 100%;
+	height: 30px;
+}
+
+.btn {
+	width: 100%;
+	padding: 15px;
+}
+
+body table {
+	border-collapse: collapse;
+	border: solid 1px #aaaaaa;
+	margin: 30px 0 30px 0;
+	box-shadow: 3px 3px 4px #888888;
+}
+
+body td {
+	padding: 15px;
+	border: solid 1px #aaaaaa;
+	background-color: #dddd;
+}
+
+body th {
+	padding: 15px;
+	background-color: #dddd55;
+}
+
+.content {
+	display: flex;
+	justify-content: center;
+}
+
+.content-table {
+	display: flex;
+	flex-direction: column;
+	width: 75%;
+}
+
+li {
+	list-style-type: none;
+}
+
+.emprunt-client {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.dates-emprunts {
+	color: #800040;
+}
+
+.livres-emprunts {
+	margin-left: 25px;
+	margin-bottom: 5px;
+	border-bottom: solid 1px #999999;
+}
+
+.checkboxes {
+	margin-bottom: 25px;
+	margin-right: 15px;
+}
+
+.bottom-btn {
+	margin-bottom: 30px;
+	
+}
