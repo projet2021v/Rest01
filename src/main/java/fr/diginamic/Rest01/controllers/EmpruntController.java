@@ -62,6 +62,40 @@ public class EmpruntController {
 		return "redirect:/emprunts/all";
 	}
 	
+	
+	
+	
+	
+	
+	@GetMapping("/{id}/update")
+	public String update(@PathVariable Integer id, Model model) {
+		model.addAttribute("empruntToUpdate", es.findEmpruntById(id));
+		model.addAttribute("listeClients", cs.findAllClients());
+		model.addAttribute("listeLivres", ls.findAllLivres());
+		return "emprunts/emprunts_modification";
+	}
+	
+	@PostMapping("/{id}/update")
+	public String update(
+			@ModelAttribute("empruntToUpdate") @Valid Emprunt e,
+			BindingResult result,
+			@PathVariable Integer id,
+			Model model) {
+		model.addAttribute("listeClients", cs.findAllClients());
+		model.addAttribute("listeLivres", ls.findAllLivres());
+		if(result.hasErrors()) {
+			e.setId(id);
+			return "emprunts/emprunts_modification";
+		}
+		es.updateEmprunt(e, id);
+		return "redirect:/emprunts/all";
+	}
+	
+	
+	
+	
+	
+	
 	@GetMapping("/{id}/delete")
 	public String delete(@PathVariable Integer id) {
 		es.removeEmprunt(id);

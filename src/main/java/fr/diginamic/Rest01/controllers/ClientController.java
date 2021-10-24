@@ -53,8 +53,8 @@ public class ClientController {
 		return "redirect:/clients/all";
 	}
 	
-	@GetMapping("/{id}/edit")
-	public String edit(@PathVariable("id") Integer id, Model model) throws ClientException {
+	@GetMapping("/{id}/update")
+	public String update(@PathVariable("id") Integer id, Model model) throws ClientException {
 		model.addAttribute("clientToUpdate", cs.findClientById(id));
 		return "clients/clients_modification";
 	}
