@@ -11,10 +11,22 @@
 
 .header h1 {
 	padding: 10px;
+}
+
+.header h1 a {
 	color: #800040;
 }
 
-.header nav {
+.header h1 a:hover {
+	color: #5500dd;
+}
+
+.menu {
+	display: flex;
+	justify-content: space-between
+}
+
+.menu nav, .logout {
 	padding: 10px;
 }
 
@@ -116,5 +128,13 @@ li {
 }
 
 .home-content a {
-	margin: 50px 30px 0 30px;
+	margin: 0 30px 0 30px;
+}
+
+.img_bibli {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
 }

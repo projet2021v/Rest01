@@ -1,11 +1,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+</head>
 <div th:fragment="header" class="header">
-	<h1>BIBLIOTHEQUE</h1>
-			
-	<nav>
-		<a th:href=@{/livres/all}>Gestion des livres</a> - 
-		<a th:href=@{/clients/all}>Gestion des clients</a> - 
-		<a th:href=@{/emprunts/all}>Gestion des emprunts</a>
-	</nav>
+	<h1><a th:href=@{/}>BIBLIOTHÈQUE</a></h1>
+	
+	<div class="menu">		
+		<nav>
+			<a th:href=@{/livres/all}>Gestion des livres</a> - 
+			<a th:href=@{/clients/all}>Gestion des clients</a> - 
+			<a th:href=@{/emprunts/all}>Gestion des emprunts</a>
+		</nav>
+		
+		<div class="logout">
+			<a th:href=@{/logout}>Se déconnecter</a>
+		</div>
+	</div>
+	
 </div>
 </html>
